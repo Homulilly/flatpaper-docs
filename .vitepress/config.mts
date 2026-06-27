@@ -86,6 +86,7 @@ export default defineConfig({
 
   themeConfig: {
     logo: '/icon-64.png',
+    logoLink: '/',
     socialLinks: [
       { icon: 'github', link: 'https://github.com/Homulilly/hexo-theme-flatpaper' }
     ]

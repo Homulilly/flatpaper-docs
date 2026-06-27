@@ -3,8 +3,17 @@
 [Flatpaper - Releases](https://github.com/Homulilly/hexo-theme-flatpaper/releases/)
 
 ## In Progress
-> 正在进行的以及尚未打包发布 Release 的内容
 
+- Hero cta button 更新
+
+## v0.3.4
+2026-06-27
+
+**新增：**
+ - 主题内置全部 Lucide-icon 与 Font Awesome 6 Free
+ - 构建时按需选取
+ 
+Lucide 系列直接填写图标名称， `fa-<type>:<name>` 使用 Font Awesome 6 
 
 ## v0.3.3
 2026-06-26

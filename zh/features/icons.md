@@ -4,16 +4,12 @@ FlatPaper 主题采用内置的图标 Registry 系统，能够根据配置和模
 
 目前主题支持了 **Lucide** 和 **Font Awesome Free 6** 两套主流图标库。
 
----
-
 ## 预览与检索链接
 
 你可以访问官方的图标库检索页面来挑选你需要的图标：
 
 * **Lucide 图标库**：[Lucide Icons 官方检索 ↗](https://lucide.dev/icons)
 * **Font Awesome 6 图标库**：[Font Awesome Free 6 官方检索 ↗](https://fontawesome.com/search?o=r&m=free)
-
----
 
 ## 设置与配置介绍
 
