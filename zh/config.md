@@ -172,15 +172,18 @@ profile:
     # Mastodon:
     #   url: https://mastodon.social/@yourname
     #   icon: send
-    # 写法 3：完全自定义 SVG
+    #   tooltip: 在 Mastodon 找我
+    # 写法 3：完全自定义 SVG —— 提供 <path>/<circle> 等子元素字符串，
+    # 容器视图框为 24x24，颜色用 currentColor
     # 知乎:
     #   url: https://www.zhihu.com/people/yourname
+    #   tooltip: 知乎主页
     #   svg: '<path d="M2 2 L22 22"/>'
   rss:
     enable: true
     path: /atom.xml
 ```
-社交平台图标支持自动识别（如 github, twitter 等），也支持指定内置图标或完全自定义 SVG 代码。对象写法可以使用任意 registry 名称，例如 `icon: send`、`icon: fa-brands:mastodon` 或 `icon: fa-solid:globe`。
+社交平台图标支持自动识别（如 github, twitter 等），也支持指定内置图标或完全自定义 SVG 代码。对象写法可以使用任意 registry 名称，例如 `icon: send`、`icon: fa-brands:mastodon` 或 `icon: fa-solid:globe`。`tooltip` 字段可自定义 hover/focus 时显示的提示文字，未配置时使用键名。
 
 ### 欢迎卡片 (welcome)
 
@@ -225,11 +228,16 @@ home_hero:
   # image:
   #   - /images/hero-1.jpg
   #   - /images/hero-2.jpg
+  # 移动端是否继续显示背景图；设为 false 时窄屏回退到纸张背景。
+  mobile_image: true
   #
   # 背景图暗色遮罩透明度：[顶部, 底部]，范围 0-1。
   # image_overlay: [0.2, 0.2]
-  # 底部跳动箭头的目标锚点；默认进入首页内容区。
+  # 底部贴纸按钮的文字与目标锚点；默认进入首页内容区。
+  # cta_text: 开始阅读
   # cta_link: "#flatpaper-home-content"
+  # 贴纸按钮背景：01-09、random，或自定义图片路径。
+  # cta_background: 01
   #
   # Hero 区域的快速导航链接。配置后将替代默认的波浪线分隔符。
   # hero_links:
@@ -363,7 +371,7 @@ artalk:
 # 每项字段：
 #   type   目前仅支持 image（弹出一张图片）
 #   name   按钮旁文字，如 赞赏 / 微信 / 支付宝（缺省为 赞赏）
-#   icon   图标名：gift（默认）| alipay | wechat | paypal | heart 或任意内置图标
+#   icon   图标名：gift（默认）| alipay | weixin | paypal | heart 或任意内置图标
 #   align  left（靠左，与"评论"同侧）| right（靠右，与"分享"同侧，默认）
 #   image  图片路径（站点 source/ 下的相对路径，如 /images/reward.jpg）或绝对 URL
 #   title  可选；气泡标题，缺省用 name
@@ -371,9 +379,9 @@ reactions:
   custom:
     # - type: image
     #   name: 赞赏
-    #   icon: wechat
+    #   icon: weixin
     #   align: right
-    #   image: /images/reward-wechat.jpg
+    #   image: /images/reward-weixin.jpg
     #   title: 微信赞赏
     # - type: image
     #   name: 支付宝
