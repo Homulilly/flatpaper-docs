@@ -5,7 +5,7 @@
 ## v0.3.5
 2026-07-02
 
-### 新增
+**新增**
 
 - Hero Image 的 CTA Button 样式调整，支持使用自定义背景图片
 - 社交链接 Hover 时显示 Tooltip
@@ -16,7 +16,7 @@
     mobile_image: false
   ```
 
-### 修复
+**修复**
 
 - 修复 Hero CTA 中英文字母 p、j、g、q、y 显示被截断的问题
 - 修复 Hero 开启 Image、但关闭窄屏模式 Image 时，hero_links 可见性异常的问题
