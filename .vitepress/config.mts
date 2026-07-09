@@ -23,7 +23,8 @@ const zhThemeConfig = {
       text: '特色功能',
       items: [
         { text: '提示块', link: '/zh/features/note' },
-        { text: '选项卡', link: '/zh/features/tabs' }
+        { text: '选项卡', link: '/zh/features/tabs' },
+        { text: '留言板', link: '/zh/features/guestbook' }
       ]
     },
     {
