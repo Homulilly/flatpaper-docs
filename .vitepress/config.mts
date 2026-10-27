@@ -24,7 +24,9 @@ const zhThemeConfig = {
       items: [
         { text: '提示块', link: '/zh/features/note' },
         { text: '选项卡', link: '/zh/features/tabs' },
-        { text: '留言板', link: '/zh/features/guestbook' }
+        { text: '留言板', link: '/zh/features/guestbook' },
+        { text: '堆叠相册', link: '/zh/features/stackalbum' },
+        { text: '赞赏名单', link: '/zh/features/reward-list' }
       ]
     },
     {

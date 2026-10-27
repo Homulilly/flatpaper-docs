@@ -2,6 +2,33 @@
 
 [Flatpaper - Releases](https://github.com/Homulilly/hexo-theme-flatpaper/releases/)
 
+## v0.5.0
+2026-10-11
+
+**新增**
+
+- **堆叠相册（Stack Album）标签支持**：
+  - `{% stackalbum %}`：将一组照片渲染为扑克牌式的堆叠相册（澎湃 OS 相册风格），点击最上层或使用键盘 `Enter` / `→` 即可抽起并滑入牌底，支持可选尺寸参数与横竖方向标记。
+  - `{% stackalbumnav <数据路径> %}`：渲染小号牌堆与标题列表（读取 `source/_data/` 下的列表数据），悬停或聚焦标题即可将对应封面翻到最上层，适合番剧、书单、影单等清单展示。
+- **手账便签风格赞赏名单（Reward List）**：
+  - 支持在关于页等独立页面正文中通过 `.reward-list` 结构化 HTML 渲染带胶带、轻微歪斜的赞赏便签卡片与右上角圆形头像。
+  - 自动解析金额文本并匹配人民币纸币色档位徽章（≥100 红 / ≥50 绿 / ≥20 棕黄 / ≥10 蓝 / ≥5 紫 / ≥1 橄榄绿）。
+- **打字机效果（Typed.js）**：
+  - 支持在页脚版权行右侧（`footer.typed`）与首页开屏简介位置（`home_hero.typed`）启用打字机效果。
+  - 支持接入一言（`hitokoto`）、一句网（`yijuzhan`）、今日诗词（`jinrishici`）接口及自定义 `sub` 句子列表循环；CDN 超时或不可达时自动退回纯文本展示。
+- **首页开屏渐进式加载与独立窄屏图源**：
+  - `home_hero.image_progressive` 与 `home_hero.image_placeholder`：支持 Medium 风格模糊小图渐进加载、入场缩放淡入，以及滚动时背景层放大渐隐离场。
+  - `home_hero.mobile_image`：除 `true` / `false` 外，支持填入独立图片路径作为窄屏（`≤760px`）专用背景图。
+- **首页模块滚动渐入动效（Reveal on Scroll）**：
+  - 首页置顶轮播、章节标题、文章卡片与侧栏卡片进入视口时逐个上浮渐显，文章卡片按索引交错出场，无 JS 或开启减少动态效果时自动降级直显。
+- **页脚纯图标链接与署名位置配置**：
+  - `footer.links` 条目支持配置 `icons` / `icon` / `iconSize`、`title` 与 `aria-label`，支持渲染 CC 协议等纯图标链接。
+  - `footer.powered.row` 支持配置主题署名所在行（`first` 并入首行末尾 / `last` 并入末行末尾 / `own` 独占一行）。
+
+**修复**
+
+- **AdSense 侧栏轨广告兼容**：限制宽屏（`≥1200px`）下 `<body>` 直属自动广告宽度，并将默认纸纹背景改为 `body::after` 渲染，避免遮挡或挤走 AdSense 侧栏轨广告。
+
 ## v0.4.0
 2026-07-05
 

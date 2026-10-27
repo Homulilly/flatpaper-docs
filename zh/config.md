@@ -126,7 +126,15 @@ buttons:
 # 页脚：
 # - left 支持 HTML；占位符：{year}=当前年份，{name}=站点 _config.yml 的 author
 # - powered 负责主题署名；设为 false 或配置 enable: false 可关闭
+#   row: first（默认，并入第一组链接行末尾）| last（并入最后一行末尾）| own（独占一行）
 # - links 支持一维链接列表（一行）或二维链接列表（多行），同一行内用 " · " 分隔
+#   条目支持 name / link / title；仅图标时省略 name，配置 icons 数组即可
+#   （如 fa-regular:copyright）；aria-label 可单独指定无障碍名称
+# - typed 是 © 版权行右侧的打字机效果，默认关闭
+#   effect: true 打字 / false 直接显示 sub 首行；loop 循环
+#   source: false 仅 sub | 1 一言 hitokoto.cn | 2 一句网 yijuzhan.com | 3 今日诗词 jinrishici.com
+#   接口内容先显示，随后循环 sub 列表；cdn 可覆盖 Typed.js 加载地址
+#   CDN 不可达或超时（6s）时自动退回纯文本显示 sub 首行
 # 不配置 footer 时默认：左 "© {year} {author}"，右 "Powered by Theme FlatPaper"
 footer:
   left: '© {year} By {name}'
@@ -135,7 +143,32 @@ footer:
     prefix: Powered by Theme
     name: FlatPaper
     link: https://github.com/Homulilly/hexo-theme-flatpaper
+    # row: first
+  typed:
+    enable: false
+    effect: true
+    loop: true
+    start_delay: 300
+    type_speed: 150
+    back_speed: 50
+    # source: 1
+    # cdn: https://cdn.jsdelivr.net/npm/typed.js@2.1.0/dist/typed.umd.js
+    # sub:
+    #     - 桃李春风一杯酒，江湖夜雨十年灯.
   links:
+    # 备案 / 版权链接示例：
+    # - name: 蜀ICP备XXXXXXXX号-X
+    #   link: https://beian.miit.gov.cn/
+    # - name: 萌ICP备XXXXXXXX号
+    #   link: https://icp.gov.moe/?keyword=XXXXXXXX
+    # - link: /copyright
+    #   title: 版权协议
+    #   aria-label: 版权协议
+    #   icons:
+    #     - fa-regular:copyright
+    #     - fa-brands:creative-commons-by
+    #     - fa-brands:creative-commons-nc
+    #     - fa-brands:creative-commons-nd
     -
       - name: 服务条款
         link: /terms
@@ -145,6 +178,20 @@ footer:
       - name: Flatpaper Tools
         link: https://hexotag.nep.me/
 ```
+
+- **`powered.row`**：控制主题署名所在行，默认 `first`（并入第一组链接行末尾）；可选 `last`（并入最后一组链接行末尾）或 `own`（独占一行，排在所有链接行之前）。署名也可以直接写 `powered: false` 关闭。
+- **`links` 条目字段**：
+  - `name` / `text`：可见文字，按此顺序回退。
+  - `link`：目标地址；省略时渲染为纯文本。
+  - `icons` / `icon`：图标名数组或单个图标，渲染在文字之前；只配置 `icons` 不配置 `name` 即为纯图标链接（如 CC 版权协议图标）。
+  - `iconSize`：图标尺寸，默认 `1em`（跟随页脚字号）。
+  - `title`：作为 `title` 属性输出，**不会**显示为可见文字（仅当既无 `name` / `text` 也无 `icons` 时才兜底作为可见文字）。
+  - `aria-label`：无障碍名称；纯图标链接未配置时自动取 `title`。
+- **`typed` 打字机效果**：
+  - `footer.typed` 在 `©` 版权行右侧渲染打字机效果，`home_hero.typed` 则使用同一套字段接管首页开屏 `bio` 的位置。
+  - `source` 支持 `false`（仅 `sub`）、`1`（一言）、`2`（一句网）、`3`（今日诗词）；接口取到的句子先显示，随后循环 `sub` 列表（`1` / `2` 会附带「出自 …」）。
+  - `sub` 为空时，`home_hero.typed` 回退到 `home_hero.bio` / `profile.bio`，`footer.typed` 回退到站点 `subtitle`。
+  - Typed.js 按需从 CDN 加载（两处同时开启也只请求一次）；当 CDN 报错或 6 秒超时未响应时，自动退回纯文本显示首条内容，不会留空。
 
 ## 侧边栏与个人信息
 
@@ -222,21 +269,31 @@ home_hero:
   # avatar: /images/avatar.jpg
   # avatar_shape: circle
   #
-  # 背景图。留空时使用主题内置的手账纸张背景；设置后图片会铺满开屏。
-  # 也可配置为数组，浏览器每次载入随机使用一张。
+  # 背景图。留空使用纸张背景；可设为多张，每次载入随机一张。
   # image: /images/hero.jpg
   # image:
   #   - /images/hero-1.jpg
   #   - /images/hero-2.jpg
-  # 移动端是否继续显示背景图；设为 false 时窄屏回退到纸张背景。
-  mobile_image: true
-  #
-  # 背景图暗色遮罩透明度：[顶部, 底部]，范围 0-1。
+  # 窄屏（≤760px）背景：true 沿用 image；false 回退纸张背景；
+  # 或填一张图片单独使用（不参与随机）。
+  # mobile_image: /images/hero-mobile.jpg
+  # 渐进加载：先显示模糊小图，大图就绪后淡入，并启用滚动离场效果。
+  # 加载失败或禁用 JS 时直接显示 image。
+  image_progressive: true
+  # 模糊层小图（建议 <100k），勿用随机图接口；省略则用纸面底色。
+  # image_placeholder: /images/hero-lqip.jpg
+  # bio 打字机效果，字段同 footer.typed；sub 为空时回退到 bio。
+  typed:
+    enable: true
+  #   source: 1
+  #   sub:
+  #     - 桃李春风一杯酒，江湖夜雨十年灯
+  # 背景遮罩透明度 [顶部, 底部]，0-1。
   # image_overlay: [0.2, 0.2]
-  # 底部贴纸按钮的文字与目标锚点；默认进入首页内容区。
+  # 贴纸按钮文字与锚点。
   # cta_text: 开始阅读
   # cta_link: "#flatpaper-home-content"
-  # 贴纸按钮背景：01-09、random，或自定义图片路径。
+  # 贴纸按钮背景：01-09、random 或图片路径。
   # cta_background: 01
   #
   # Hero 区域的快速导航链接。配置后将替代默认的波浪线分隔符。
@@ -263,6 +320,12 @@ home_hero:
     #     alt: GitHub
     #     link: https://github.com/yourname
 ```
+
+- **`mobile_image`（窄屏背景）**：既是开关也可以是图源：`true`（默认）沿用 `image`；`false` 让窄屏回退到纸张背景以保证贴纸清晰；填入一条图片路径（如 `/images/hero-mobile.jpg`）则让窄屏（`≤760px`）单独使用该图片（不参与 `image` 数组随机轮播，适合准备竖版裁切图）。
+- **`image_progressive` & `image_placeholder`（渐进式加载与滚动离场）**：
+  - 开启后先铺一层高斯模糊小图（`image_placeholder`，未配置时使用纸面底色），背景大图解码就绪后淡出交接；入场带有缩放淡入，向下滚动时背景照片层会轻微放大并线性渐隐（贴纸与信息卡片不受影响）。
+  - 注意：`image_placeholder` 请勿填写随机图接口，否则模糊层预览的会是另一张照片。
+- **`typed`（打字机效果）**：支持与 `footer.typed` 相同的配置字段，接管开屏 `bio` 区域；`sub` 为空时自动回退到 `home_hero.bio` 或 `profile.bio`。
 
 > 由于可拖动贴纸的存在，Hero 内的站外链接跳转前会询问。
 
