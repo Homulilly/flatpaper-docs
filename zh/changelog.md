@@ -2,6 +2,18 @@
 
 [Flatpaper - Releases](https://github.com/Homulilly/hexo-theme-flatpaper/releases/)
 
+## v0.5.1
+2026-10-27
+
+**新增与调整**
+
+- **首页开屏 CTA 按钮重构为 CSS 纸片卡片与贴纸预设**：
+  - 将原先 9 张内置 WebP 背景图替换为纯 CSS 绘制的手账纸片卡片 + 内联 SVG 贴纸，完整跟随暗色模式与主题强调色，且按钮宽度随文字自适应不再截断。
+  - `cta_background`：`01`–`09` 映射为 9 组「颜色 + 贴纸」内置预设，`random` 在首屏渲染前随机选取一组；填写自定义图片路径时仍保留 `180×60` 整图背景按钮模式。
+  - 新增 `cta_color`：可单独覆盖预设颜色（支持 `brown` / `pink` / `orange` / `green` / `yellow` / `blue` / `violet` / `accent` 或 `#hex` 十六进制色值）。
+  - 新增 `cta_sticker`：可单独覆盖预设贴纸（支持 `none` / `flower` / `bear` / `tulip` / `sprout` / `star` / `sparkle` / `heart` / `tape` 或自定义图片路径）。
+  - 在线预览与配置生成工具：[Flatpaper Tools - CTA](https://hexotag.nep.me/cta)
+
 ## v0.5.0
 2026-10-11
 

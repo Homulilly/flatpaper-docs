@@ -293,8 +293,12 @@ home_hero:
   # 贴纸按钮文字与锚点。
   # cta_text: 开始阅读
   # cta_link: "#flatpaper-home-content"
-  # 贴纸按钮背景：01-09、random 或图片路径。
+  # 贴纸按钮样式：01-09 内置纸片预设、random，或图片路径（整张图做按钮背景）。
   # cta_background: 01
+  # 覆盖预设的颜色：brown/pink/orange/green/yellow/blue/violet/accent 或 #hex。
+  # cta_color: accent
+  # 覆盖预设的贴纸：none/flower/bear/tulip/sprout/star/sparkle/heart/tape 或图片路径。
+  # cta_sticker: heart
   #
   # Hero 区域的快速导航链接。配置后将替代默认的波浪线分隔符。
   # hero_links:
@@ -326,6 +330,26 @@ home_hero:
   - 开启后先铺一层高斯模糊小图（`image_placeholder`，未配置时使用纸面底色），背景大图解码就绪后淡出交接；入场带有缩放淡入，向下滚动时背景照片层会轻微放大并线性渐隐（贴纸与信息卡片不受影响）。
   - 注意：`image_placeholder` 请勿填写随机图接口，否则模糊层预览的会是另一张照片。
 - **`typed`（打字机效果）**：支持与 `footer.typed` 相同的配置字段，接管开屏 `bio` 区域；`sub` 为空时自动回退到 `home_hero.bio` 或 `profile.bio`。
+- **底部贴纸按钮（`cta_*`）**：
+  - 点击会平滑滚入首页内容区（避开顶部导航栏遮挡）；`cta_text` 修改按钮文字，`cta_link` 修改目标锚点。
+  - 按钮采用 CSS 绘制的纸片卡片，自动适配暗色模式，且宽度随文字自适应。可通过 [Flatpaper Tools - CTA](https://hexotag.nep.me/cta) 在线预览不同配色与贴纸组合。
+  - `cta_background` 用于选择内置预设（每个预设是一组「颜色 + 贴纸」组合，默认是中性的 `01`）：
+
+    | 预设 | 颜色 (`cta_color`) | 贴纸 (`cta_sticker`) |
+    | :--- | :--- | :--- |
+    | `01` | `brown` | 无 (`none`) |
+    | `02` | `pink` | `flower` |
+    | `03` | `brown` | `bear` |
+    | `04` | `orange` | `tulip` |
+    | `05` | `green` | `sprout` |
+    | `06` | `yellow` | `star` |
+    | `07` | `blue` | `sparkle` |
+    | `08` | `violet` | `heart` |
+    | `09` | `blue` | `tape` |
+
+    设为 `random` 会在每次页面载入时从 9 个预设中随机选取一个；设为自定义图片路径（如 `/images/my-cta.webp`）时则切换为整张图片做背景的 `180×60` 按钮（此时 `cta_color` 与 `cta_sticker` 不生效）。
+  - `cta_color`：单独覆盖预设的颜色，支持 `brown`、`pink`、`orange`、`green`、`yellow`、`blue`、`violet`、`accent`（跟随主题强调色），或 `#e8899a` 这样的十六进制色值。
+  - `cta_sticker`：单独覆盖预设的贴纸，支持 `none`、`flower`、`bear`、`tulip`、`sprout`、`star`、`sparkle`、`heart`、`tape`，或自定义图片路径（如 `/images/my-sticker.png`，建议使用正方形透明 PNG/SVG）。配合 `random` 使用时，已显式配置的 `cta_color` 或 `cta_sticker` 保持固定，仅随机另一项。
 
 > 由于可拖动贴纸的存在，Hero 内的站外链接跳转前会询问。
 
