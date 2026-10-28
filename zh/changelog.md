@@ -14,6 +14,11 @@
   - 新增 `cta_sticker`：可单独覆盖预设贴纸（支持 `none` / `flower` / `bear` / `tulip` / `sprout` / `star` / `sparkle` / `heart` / `tape` 或自定义图片路径）。
   - 在线预览与配置生成工具：[Flatpaper Tools - CTA](https://hexotag.nep.me/cta)
 
+**修复**
+
+- **AdSense 侧栏轨广告兼容**：限制宽屏（`≥1200px`）下 `<body>` 直属自动广告宽度，并将默认纸纹背景改为 `body::after` 渲染，避免遮挡或挤走 AdSense 侧>
+栏轨广告。
+
 ## v0.5.0
 2026-10-11
 
@@ -36,10 +41,6 @@
 - **页脚纯图标链接与署名位置配置**：
   - `footer.links` 条目支持配置 `icons` / `icon` / `iconSize`、`title` 与 `aria-label`，支持渲染 CC 协议等纯图标链接。
   - `footer.powered.row` 支持配置主题署名所在行（`first` 并入首行末尾 / `last` 并入末行末尾 / `own` 独占一行）。
-
-**修复**
-
-- **AdSense 侧栏轨广告兼容**：限制宽屏（`≥1200px`）下 `<body>` 直属自动广告宽度，并将默认纸纹背景改为 `body::after` 渲染，避免遮挡或挤走 AdSense 侧栏轨广告。
 
 ## v0.4.0
 2026-07-05
